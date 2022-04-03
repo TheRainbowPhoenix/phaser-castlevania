@@ -1,0 +1,5 @@
+/* Put your global CSS here */
+@font-face {
+    font-family: UI;
+    src: url('./assets/fonts/rajdhani-semibold.ttf'), url('./assets/fonts/rajdhani-bold.ttf');
+}

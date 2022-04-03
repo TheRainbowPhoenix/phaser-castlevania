@@ -1,9 +1,7 @@
-import Phaser from 'phaser';
-import config from './config';
-import GameScene from './scenes/Game';
+import { GameApp } from './GameApp'
 
-new Phaser.Game(
-  Object.assign(config, {
-    scene: [GameScene]
-  })
-);
+import config from './config'
+
+window.addEventListener('load', () => {
+  const game = new GameApp(config)
+})
