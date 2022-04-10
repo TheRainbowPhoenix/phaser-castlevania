@@ -3,3 +3,9 @@
     font-family: UI;
     src: url('./assets/fonts/rajdhani-semibold.ttf'), url('./assets/fonts/rajdhani-bold.ttf');
 }
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: #040404;
+}
