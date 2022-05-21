@@ -6,6 +6,8 @@ Thumbs.db
 
 # Vendors
 node_modules/
+editor/node_modules/
+editor/dist/
 
 # Build
 dist

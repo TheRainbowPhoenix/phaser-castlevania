@@ -1,5 +1,7 @@
+import { StateMachine } from "../engine/anim";
 import { EventHandler } from "../handlers/EventHandler";
-import { SpineObject } from "./SpineObject";
+import { SpineObject } from "../models/SpineObject";
+import { IdleState, SwingState } from "./states/PlayerStates";
 
 enum moveDirection {
   right,
@@ -19,6 +21,8 @@ export class Player extends SpineObject {
   dashCooldown: number
   moveDirection: moveDirection
 
+  states: StateMachine
+
   constructor(
     scene: Phaser.Scene,
     x: number,
@@ -33,7 +37,7 @@ export class Player extends SpineObject {
 
     this.setScale(0.5)
 
-    this.initStates()
+    this.initStates(scene)
     this.initEvents()
 
     this.initPhysics()
@@ -45,7 +49,18 @@ export class Player extends SpineObject {
     // this.spine.play('idle', true, true)
   }
 
-  initStates() {
+  initStates(scene: Phaser.Scene) {
+    this.states = new StateMachine(
+      'idle',
+      {
+        idle: new IdleState(),
+        // move: new MoveState(),
+        swing: new SwingState(),
+        // dash: new DashState(),
+      },
+      [scene, this]
+    )
+
     this.alive = true
     this.jumping = false
     this.jumpCount = 0
@@ -107,6 +122,11 @@ export class Player extends SpineObject {
   initBullet() {}
 
   update(time: number, delta: number) {
+
+    this.states.step()
+
+    return
+
     if (!this.alive) {
       // this.spine.play('Down', false, true)
       this.spine.play('Down_Idle', true, true)
@@ -122,7 +142,6 @@ export class Player extends SpineObject {
           this.jumpCount = 0
         }
       }
-
 
       this.dash = this.cursors.shift.isDown && this.dashCooldown <= time
 
@@ -140,7 +159,7 @@ export class Player extends SpineObject {
       if (this.animWait > 0 && this.animWait >= time) {
         // STOP PROCESSING MOVES !
         console.log('ignore')
-        return;
+        return
       } else {
         this.animWait = -1
       }
@@ -158,7 +177,7 @@ export class Player extends SpineObject {
         newMoveDirection = moveDirection.right
       }
 
-      let noFlip = (this.dash && newMoveDirection != this.moveDirection)
+      let noFlip = this.dash && newMoveDirection != this.moveDirection
 
       if (this.cursors.left.isDown) {
         this.body.setVelocityX(-moveVelocity)

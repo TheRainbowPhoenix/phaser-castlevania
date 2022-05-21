@@ -1,4 +1,6 @@
-export class SpineObject /* extends Phaser.GameObjects.GameObject */ {
+
+export class SpineObject /* extends Phaser.GameObjects.GameObject */
+{
   scene: Phaser.Scene
   spine: SpineGameObject
   body: Phaser.Physics.Arcade.Body
@@ -30,6 +32,9 @@ export class SpineObject /* extends Phaser.GameObjects.GameObject */ {
       attachment: 0,
     }
 
+    this.spine.drawDebug = true
+    this.spine.drawBones = true
+
     this.scale = 1
 
     //@ts-ignore
@@ -40,7 +45,8 @@ export class SpineObject /* extends Phaser.GameObjects.GameObject */ {
 
     this.setSkin('Normal')
 
-    this.setAnimation('Idle_Sniper', true)
+    // TODO
+    // this.setAnimation('Idle_Sniper', true)
     this.setAttachment('Slot_Sniper', 'Sniper_02')
 
     console.log(
@@ -95,7 +101,9 @@ export class SpineObject /* extends Phaser.GameObjects.GameObject */ {
   }
 
   getAttachments() {
-      return (!!this.spine.skeleton.skin) ? this.spine.skeleton.skin.attachments : []
+    return !!this.spine.skeleton.skin
+      ? this.spine.skeleton.skin.attachments
+      : []
   }
 
   getSlots() {

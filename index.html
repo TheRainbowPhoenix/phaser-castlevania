@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Game - Phaser 3 Test</title>
+    <title>Game & Engine - Phaser 3 Ultimate Test</title>
     <meta charset="utf-8" />
 
     <link rel="preload" as="font" href="assets/fonts/rajdhani-semibold.ttf" type="font/ttf" />
@@ -10,10 +10,16 @@
         margin: 0;
       }
     </style>
-    <link rel="stylesheet" href="global.css" type="text/css" />
+    <link rel="stylesheet" href="./global.css" type="text/css" />
     <script type="module" src="/src/index.ts"></script>
+    
+    <link rel="stylesheet" href="./editor/dist/editor.css" type="text/css" />
+    <script type="module" src="./editor/dist/editor.js"></script>
   </head>
   <body>
-    <div id="game"></div>
+    <div id="editor">
+      <div id="game"></div>
+      <div id="debug"></div>
+    </div>
   </body>
 </html>

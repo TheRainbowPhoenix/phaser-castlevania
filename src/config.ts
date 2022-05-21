@@ -5,11 +5,15 @@ export default {
   type: Phaser.AUTO,
   width: 800 * 1.5,
   height: 600 * 1.5,
-  parent: 'phaser-example',
+  parent: document.getElementById('game'),
   physics: {
+    // default: 'matter',
+    // matter: {
+    //   debug: true
+    // }
     default: 'arcade',
     arcade: {
-      // gravity: { y: 300 },
+      gravity: { y: 300 },
       debug: true,
     },
   },
