@@ -4,8 +4,8 @@
 	export let y;
 </script>
 <div style="
-		top: {y + 5}px;
-		left: {x + 5}px;">{title}</div>
+		top: {y + 12}px;
+		left: {x + 12}px;">{title}</div>
 
 <style>
 	div {
@@ -15,5 +15,25 @@
 		border-radius: .125rem;
 		padding: 4px;
 		position: absolute;
+		
+		opacity: 0;
+
+		animation-duration: .125s;
+  		animation-name: slidein;
+		animation-delay: 1s;
+		animation-timing-function: ease-in;
+		animation-fill-mode: forwards;
+	}
+
+	@keyframes slidein {
+		from {
+			opacity: 0;
+			margin-top: -0.5em;
+		}
+
+		to {
+			opacity: 1;
+			margin-top: 0;
+		}
 	}
 </style>

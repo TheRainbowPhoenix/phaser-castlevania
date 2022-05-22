@@ -6,6 +6,7 @@ export default {
   width: 800 * 1.5,
   height: 600 * 1.5,
   parent: document.getElementById('game'),
+  hideBanner: true,  // Hide the console banner
   physics: {
     // default: 'matter',
     // matter: {

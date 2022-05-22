@@ -5,6 +5,7 @@
 }
 
 html, body {
+    overflow: hidden;
     width: 100%;
     height: 100%;
     background-color: #040404;
@@ -51,3 +52,5 @@ html, body {
 #debug .animCard.prev span {
     background-color: #2D2E30;
 }
+
+

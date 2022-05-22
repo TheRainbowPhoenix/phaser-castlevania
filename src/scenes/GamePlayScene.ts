@@ -8,6 +8,8 @@ export class GamePlayScene extends Phaser.Scene {
   }
 
   preload() {
+    this.game.events.emit('preloadScene', 'GamePlayScene', this)
+
     let SPINEBOY_KEY = "Girl"
     this.load.setPath('assets/girl/')
     this.load.spine(
@@ -34,6 +36,7 @@ export class GamePlayScene extends Phaser.Scene {
     // initMapLayer()
 
     // TODO: wall colider camera
+    this.cameras.main.name = "Main Camera"
     this.cameras.main.startFollow(this.player.spine, true)
     this.cameras.main.setLerp(1, 0)
 
@@ -41,6 +44,8 @@ export class GamePlayScene extends Phaser.Scene {
     this.physics.world.setBoundsCollision(true, false, false, true)
 
     this.initCollider()
+
+    this.game.events.emit('loadScene', 'GamePlayScene', this)
   }
 
   initCollider() {}

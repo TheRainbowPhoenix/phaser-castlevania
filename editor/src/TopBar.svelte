@@ -183,6 +183,7 @@
         /* width: 100%; */
         display: flex;
         padding: 0 5px;
+        grid-column: span 2;
     }
     .items {
         height: 26px;
@@ -217,6 +218,7 @@
     .items > button:focus,
     .items > button.selected {
         background:#6A6A6A;
+        color: #F0F0F0;
     }
 
     .items > button.disabled {
@@ -235,6 +237,7 @@
         line-height: 26px;
         user-select: none;
         pointer-events: none;
+        color: #D2D2D2;
     }
 
     .items > button svg {
@@ -243,6 +246,7 @@
         margin: 0 auto;
         width: 20px;
         height: 20px;
+        color: #C4C4C4;
     }
 
     button {

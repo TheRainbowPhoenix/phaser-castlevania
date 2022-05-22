@@ -49,17 +49,22 @@ export class SpineObject /* extends Phaser.GameObjects.GameObject */
     // this.setAnimation('Idle_Sniper', true)
     this.setAttachment('Slot_Sniper', 'Sniper_02')
 
-    console.log(
-      'Hookable Slots: ',
-      this.getSlots().forEach((element: spine.Slot, index, array) => {
-        if (element.data.attachmentName !== null) {
-          console.log(element.data.attachmentName)
-        }
-      })
-    )
+    // console.log(
+    //   'Hookable Slots: ',
+    //   this.getSlots().forEach((element: spine.Slot, index, array) => {
+    //     if (element.data.attachmentName !== null) {
+    //       console.log(element.data.attachmentName)
+    //     }
+    //   })
+    // )
 
-    console.log('Attachments: ', this.getAttachments())
-    console.log('Slots: ', this.getSlots())
+    // console.log('Attachments: ', this.getAttachments())
+    // console.log('Slots: ', this.getSlots())
+
+    scene.game.events.emit('createdSpineObject', scene, this)
+
+    this.spine.on('loadSpineSkin', this.setSkin, this)
+    // scene.game.events.on('loadSpineSkin', this.setSkin, this)
   }
 
   isFlipX(): boolean {
@@ -90,6 +95,8 @@ export class SpineObject /* extends Phaser.GameObjects.GameObject */
   setSkin(name: string) {
     this.spine.setSkin(null)
     this.spine.setSkinByName(name)
+
+    this.spine.emit('changedSkin', name, this)
   }
 
   setAnimation(animation: string, loop: boolean = false) {

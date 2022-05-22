@@ -372,7 +372,10 @@
 				"uvs": [1,1,0,1,0,0,1,0],
 				"triangles": [1,2,3,1,3,0],
 				"vertices": [-80.93,33.56,156.07,33.85,156.14,-27.15,-80.86,-27.44],"hull":4,"edges":[0,2,2,4,4,6,0,6],"width":237,"height":61},"ShootGun_02":{"x":35.91,"y":2.92,"rotation":179.22,"width":232,"height":54},"ShootGun_03":{"x":39.31,"y":1.85,"rotation":179.57,"width":237,"height":60},"ShootGun_04":{"x":36.5,"y":2.82,"rotation":178.45,"width":232,"height":54}
-			},"Slot_Sniper":{"Sniper_01":{"x":67.3,"y":4.47,"rotation":178.4,"width":305,"height":72},"Sniper_02":{"x":58.93,"y":-6.21,"rotation":179.94,"width":306,"height":82},"Sniper_03":{"x":61.07,"y":-2.36,"rotation":179.03,"width":302,"height":79}
+			},"Slot_Sniper":{
+				"Sniper_01":{"x":67.3,"y":4.47,"rotation":178.4,"width":305,"height":72},
+				"Sniper_02":{"x":58.93,"y":-6.21,"rotation":179.94,"width":306,"height":82},
+				"Sniper_03":{"x":61.07,"y":-2.36,"rotation":179.03,"width":302,"height":79}
 			},"Slot_Submachine":{"Submachine_01":{"type":"mesh",
 				"uvs": [1,1,0,1,0,0,1,0],
 				"triangles": [1,2,3,1,3,0],
