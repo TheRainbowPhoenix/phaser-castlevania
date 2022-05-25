@@ -18,7 +18,7 @@ export class GameUIScene extends Phaser.Scene {
 
     // Debug test
     let data = this.store.unwrap().data
-    console.log(data.health)
+    // console.log(data.health)
 
     // this.store = this.registry.values.store.unwrap() || new Store(baseState).unwrap()
 

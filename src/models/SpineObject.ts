@@ -1,6 +1,6 @@
 
-export class SpineObject /* extends Phaser.GameObjects.GameObject */
-{
+export class SpineObject extends Phaser.GameObjects.GameObject  {
+  /* extends Phaser.GameObjects.GameObject */
   scene: Phaser.Scene
   spine: SpineGameObject
   body: Phaser.Physics.Arcade.Body
@@ -20,7 +20,7 @@ export class SpineObject /* extends Phaser.GameObjects.GameObject */
     animationName?: string,
     loop?: boolean
   ) {
-    // super(scene, 'custom-spine')
+    super(scene, 'custom-spine')
 
     this.flipped = false
 
@@ -43,11 +43,11 @@ export class SpineObject /* extends Phaser.GameObjects.GameObject */
 
     const bounds = this.spine.getBounds()
 
-    this.setSkin('Normal')
+    // this.setSkin('Normal')
 
     // TODO
     // this.setAnimation('Idle_Sniper', true)
-    this.setAttachment('Slot_Sniper', 'Sniper_02')
+    // this.setAttachment('Slot_Sniper', 'Sniper_02')
 
     // console.log(
     //   'Hookable Slots: ',
@@ -60,6 +60,8 @@ export class SpineObject /* extends Phaser.GameObjects.GameObject */
 
     // console.log('Attachments: ', this.getAttachments())
     // console.log('Slots: ', this.getSlots())
+
+    this.initPhysics()
 
     scene.game.events.emit('createdSpineObject', scene, this)
 
@@ -115,5 +117,18 @@ export class SpineObject /* extends Phaser.GameObjects.GameObject */
 
   getSlots() {
     return this.spine.skeleton.slots
+  }
+
+  initPhysics() {
+    let gravity = 300
+    // TODO: change gravity on slime and stuff
+    this.body.setGravityY(gravity).setCollideWorldBounds()
+    this.body.setCollideWorldBounds(true)
+  }
+
+  refreshBody() {
+    this.body.updateFromGameObject();
+
+    return this;
   }
 }

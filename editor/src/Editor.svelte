@@ -1,4 +1,6 @@
 <script>
+    import './global.css'
+
     export let game = null;
 
     import { onMount } from "svelte";
@@ -25,7 +27,7 @@ import InspectorPanel from "./panels/InspectorPanel.svelte";
         window.addEventListener('engine_debug', (e) => {
             
             if (e.detail.name && e.detail.name === 'AnimGraph') {
-                console.log(e.detail.name);
+                // console.log(e.detail.name);
 
                 states = [...Object.keys(e.detail.states)];
 
@@ -61,7 +63,7 @@ import InspectorPanel from "./panels/InspectorPanel.svelte";
                 }
 
                 handler_ready (...data) {
-                    console.log(window.game.scene);
+                    // console.log(window.game.scene);
 
                     // window.game.scene.bootScene(window.game.scene.scenes[0])
 
@@ -80,7 +82,10 @@ import InspectorPanel from "./panels/InspectorPanel.svelte";
                     console.log(scene);
                     console.log(spine);
 
-                    currentSpine = spine;
+                    if (spine.constructor.name === "Player") {
+                        currentSpine = spine;
+                    }
+                    
                 }
 
                 handler_loadScene (name, scene) {

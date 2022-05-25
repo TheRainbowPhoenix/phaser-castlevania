@@ -1,0 +1,181 @@
+
+NPC_PYM.png
+size: 748,748
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Arm1_1
+  rotate: false
+  xy: 682, 268
+  size: 42, 87
+  orig: 42, 89
+  offset: 0, 1
+  index: -1
+Arm1_2
+  rotate: true
+  xy: 494, 9
+  size: 60, 112
+  orig: 60, 112
+  offset: 0, 0
+  index: -1
+Arm2_1
+  rotate: false
+  xy: 614, 65
+  size: 47, 86
+  orig: 47, 88
+  offset: 0, 1
+  index: -1
+Arm2_2
+  rotate: true
+  xy: 510, 71
+  size: 72, 102
+  orig: 72, 102
+  offset: 0, 0
+  index: -1
+Body
+  rotate: false
+  xy: 594, 231
+  size: 86, 193
+  orig: 86, 193
+  offset: 0, 0
+  index: -1
+Ear0
+  rotate: false
+  xy: 665, 474
+  size: 14, 18
+  orig: 14, 20
+  offset: 0, 1
+  index: -1
+Ear1
+  rotate: false
+  xy: 679, 160
+  size: 22, 31
+  orig: 22, 31
+  offset: 0, 0
+  index: -1
+Ear2
+  rotate: false
+  xy: 703, 166
+  size: 25, 25
+  orig: 25, 25
+  offset: 0, 0
+  index: -1
+Face
+  rotate: true
+  xy: 665, 494
+  size: 64, 81
+  orig: 64, 83
+  offset: 0, 1
+  index: -1
+G1
+  rotate: true
+  xy: 288, 7
+  size: 64, 204
+  orig: 64, 204
+  offset: 0, 0
+  index: -1
+G2
+  rotate: false
+  xy: 682, 357
+  size: 45, 135
+  orig: 45, 135
+  offset: 0, 0
+  index: -1
+G3
+  rotate: false
+  xy: 510, 426
+  size: 100, 320
+  orig: 100, 320
+  offset: 0, 0
+  index: -1
+G4
+  rotate: false
+  xy: 665, 560
+  size: 35, 186
+  orig: 35, 186
+  offset: 0, 0
+  index: -1
+G5
+  rotate: false
+  xy: 612, 466
+  size: 51, 280
+  orig: 51, 280
+  offset: 0, 0
+  index: -1
+G6
+  rotate: false
+  xy: 702, 560
+  size: 34, 186
+  orig: 34, 186
+  offset: 0, 0
+  index: -1
+HC
+  rotate: false
+  xy: 663, 82
+  size: 31, 69
+  orig: 31, 69
+  offset: 0, 0
+  index: -1
+HCB
+  rotate: true
+  xy: 612, 428
+  size: 36, 60
+  orig: 36, 60
+  offset: 0, 0
+  index: -1
+Hair
+  rotate: false
+  xy: 594, 153
+  size: 83, 76
+  orig: 83, 76
+  offset: 0, 0
+  index: -1
+Leg1
+  rotate: true
+  xy: 2, 6
+  size: 65, 284
+  orig: 65, 284
+  offset: 0, 0
+  index: -1
+Leg2
+  rotate: false
+  xy: 510, 145
+  size: 82, 279
+  orig: 82, 279
+  offset: 0, 0
+  index: -1
+Mouth3
+  rotate: false
+  xy: 729, 479
+  size: 17, 13
+  orig: 17, 15
+  offset: 0, 1
+  index: -1
+Opai1
+  rotate: false
+  xy: 608, 16
+  size: 48, 47
+  orig: 48, 47
+  offset: 0, 0
+  index: -1
+Opai2
+  rotate: false
+  xy: 682, 218
+  size: 43, 48
+  orig: 43, 48
+  offset: 0, 0
+  index: -1
+X
+  rotate: false
+  xy: 2, 73
+  size: 506, 673
+  orig: 506, 675
+  offset: 0, 1
+  index: -1
+eyesB
+  rotate: false
+  xy: 679, 193
+  size: 42, 23
+  orig: 42, 25
+  offset: 0, 1
+  index: -1

@@ -27,7 +27,7 @@ export class IdleState extends State {
 
     this.next = Math.floor(Math.random() * 10)
 
-    console.log('doing - IdleState : ' + this.next)
+    // console.log('doing - IdleState : ' + this.next)
 
     hero.spine.once('complete', () => {
       if (this.next >= 7) {
@@ -91,7 +91,7 @@ export class IdleState extends State {
 
 export class SwingState extends State {
   enter(scene: Phaser.Scene, hero: Player) {
-    console.log('doing - SwingState')
+    // console.log('doing - SwingState')
 
     hero.body.setVelocity(0, 0)
     hero.spine.play(`Dash_Forward`, false, true)

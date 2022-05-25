@@ -1,7 +1,9 @@
 <script lang="ts">
-    import { currentScene } from "../store/game";
+    import { currentScene, inspectedGameObject, reducible } from "../store/game";
 
     import { onMount, onDestroy } from 'svelte';
+    import { selectedGameObjectId } from "../store/editor";
+    import { resetGameObjectTint, tintGameObject } from "../helpers/gameObject";
 
     let subscription;
 
@@ -33,8 +35,7 @@ plugins
 renderer
     */
 
-    onMount(async () => {
-        subscription = currentScene.subscribe(value => {
+    subscription = currentScene.subscribe(value => {
             console.log(value);
 
             if (value) {
@@ -67,11 +68,42 @@ renderer
             
             
         });
-    })
+
+    onDestroy(subscription)
+
+    // onMount(async () => {
+        
+    // })
 
     // onDestroy(async () => {
     //     console.error(subscription);
     // })
+
+    let tintMemo;
+
+    const selectGameObject = (index, gameObject) => {
+
+        let objectName = `${gameObject.type}_${index}`
+
+        let prev = $inspectedGameObject;
+        if (prev) {
+            resetGameObjectTint(prev, tintMemo);
+        }
+
+        if (objectName !== $selectedGameObjectId) {
+            // GameObject Selection behaviour 
+            
+            tintMemo = tintGameObject(gameObject)
+
+            selectedGameObjectId.set(objectName)
+            inspectedGameObject.set(gameObject);
+        } else {
+            // GameObject de-select behaviour
+
+            selectedGameObjectId.set('');
+            inspectedGameObject.set(undefined);
+        }
+    }
 
     
 </script>
@@ -94,8 +126,14 @@ renderer
     </div>
 
     <div class="container">
-        {#each cameras as camera}
-            <div class="item">
+        {#each cameras as camera, i}
+            <div class="item"
+                class:selected="{$selectedGameObjectId === `${camera.type}_${i}`}"
+
+                on:click="{() => {
+                    selectGameObject(i, camera)
+                }}"
+            >
                 <!-- <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path fill="currentColor" d="M3 6a3 3 0 0 1 3-3h1.5a.5.5 0 0 1 0 1H6a2 2 0 0 0-2 2v1.5a.5.5 0 0 1-1 0V6Zm9-2.5a.5.5 0 0 1 .5-.5H14a3 3 0 0 1 3 3v1.5a.5.5 0 0 1-1 0V6a2 2 0 0 0-2-2h-1.5a.5.5 0 0 1-.5-.5ZM3.5 12a.5.5 0 0 1 .5.5V14a2 2 0 0 0 2 2h1.5a.5.5 0 0 1 0 1H6a3 3 0 0 1-3-3v-1.5a.5.5 0 0 1 .5-.5Zm13 0a.5.5 0 0 1 .5.5V14a3 3 0 0 1-3 3h-1.5a.5.5 0 0 1 0-1H14a2 2 0 0 0 2-2v-1.5a.5.5 0 0 1 .5-.5ZM10 11a1 1 0 1 0 0-2a1 1 0 0 0 0 2Zm-4 1V9a1 1 0 0 1 1-1h1l.703-1.055a1 1 0 0 1 .832-.445h.93a1 1 0 0 1 .832.445L12 8h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1Zm6-2a2 2 0 1 0-4 0a2 2 0 0 0 4 0Z"/></svg> -->
                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path fill="currentColor" d="M5 5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1.029l2.841 1.847A.75.75 0 0 0 17 13.19V6.811a.75.75 0 0 0-1.16-.629L13 8.032V7a2 2 0 0 0-2-2H5Zm8 4.224l3-1.952v5.457l-3-1.95V9.224ZM12 7v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1ZM6.892 2.03a7.067 7.067 0 0 0-.85.37a4.67 4.67 0 0 0-.292.166l-.018.012l-.006.004l-.002.001l-.001.001L6 3l-.277-.416a.5.5 0 0 0 .554.833l.007-.005l.041-.025c.038-.023.099-.058.18-.1c.162-.085.407-.2.728-.317A8.105 8.105 0 0 1 10 2.5c1.183 0 2.125.236 2.767.47c.32.117.566.232.728.317a3.69 3.69 0 0 1 .22.125l.008.004l.262-.393l-.262.393a.5.5 0 1 0 .554-.832L14 3l.277-.416l-.001-.001l-.002-.001l-.006-.004l-.019-.012a4.665 4.665 0 0 0-.292-.166a7.063 7.063 0 0 0-.849-.37A9.104 9.104 0 0 0 10 1.5a9.104 9.104 0 0 0-3.108.53Zm-.615 1.387c-.001 0 0 0 0 0Zm7.446 0ZM6.892 17.97c.733.267 1.79.53 3.108.53a9.104 9.104 0 0 0 3.108-.53c.367-.133.653-.268.85-.37a4.626 4.626 0 0 0 .291-.166l.019-.012l.006-.004l.002-.001s.001-.001-.276-.417l.277.416a.5.5 0 0 0-.554-.832l.262.393l-.262-.393l-.008.005a3.67 3.67 0 0 1-.22.125a6.05 6.05 0 0 1-.728.316A8.106 8.106 0 0 1 10 17.5a8.106 8.106 0 0 1-2.767-.47a6.075 6.075 0 0 1-.728-.317a3.663 3.663 0 0 1-.22-.125l-.008-.005a.5.5 0 0 0-.554.833L6 17l-.277.416l.001.001l.002.001l.006.004l.018.012l.063.038a7.063 7.063 0 0 0 1.078.497Zm-.615-1.386c-.001 0 0 0 0 0Zm7.446 0Z"/></svg>
 
@@ -103,15 +141,32 @@ renderer
             </div>
         {/each}
 
-        {#each children as child}
-            <div class="item">
-                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path fill="currentColor" d="M5.703 6.042a.5.5 0 1 0-.406.914L9.5 8.824V13.5a.5.5 0 0 0 1 0V8.824l4.203-1.868a.5.5 0 1 0-.406-.914L10 7.952l-4.297-1.91ZM11.3 2.481a3.5 3.5 0 0 0-2.6 0L2.943 4.784A1.5 1.5 0 0 0 2 6.176v7.646a1.5 1.5 0 0 0 .943 1.393L8.7 17.518a3.5 3.5 0 0 0 2.6 0l5.757-2.303A1.5 1.5 0 0 0 18 13.822V6.176a1.5 1.5 0 0 0-.943-1.392L11.3 2.48Zm-2.228.928a2.5 2.5 0 0 1 1.857 0l5.757 2.303a.5.5 0 0 1 .314.464v7.646a.5.5 0 0 1-.314.465l-5.758 2.303a2.5 2.5 0 0 1-1.856 0l-5.758-2.303A.5.5 0 0 1 3 13.822V6.176a.5.5 0 0 1 .314-.464L9.072 3.41Z"/></svg>
+        {#each children as child, i}
+            <div class="item"
+                class:selected="{$selectedGameObjectId === `${child.type}_${i}`}"
+
+                on:click="{() => {
+                    selectGameObject(i, child)
+                }}"
+            >
+                <button class="act" on:click="{(e) => console.log(child)}">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path fill="currentColor" d="M5.703 6.042a.5.5 0 1 0-.406.914L9.5 8.824V13.5a.5.5 0 0 0 1 0V8.824l4.203-1.868a.5.5 0 1 0-.406-.914L10 7.952l-4.297-1.91ZM11.3 2.481a3.5 3.5 0 0 0-2.6 0L2.943 4.784A1.5 1.5 0 0 0 2 6.176v7.646a1.5 1.5 0 0 0 .943 1.393L8.7 17.518a3.5 3.5 0 0 0 2.6 0l5.757-2.303A1.5 1.5 0 0 0 18 13.822V6.176a1.5 1.5 0 0 0-.943-1.392L11.3 2.48Zm-2.228.928a2.5 2.5 0 0 1 1.857 0l5.757 2.303a.5.5 0 0 1 .314.464v7.646a.5.5 0 0 1-.314.465l-5.758 2.303a2.5 2.5 0 0 1-1.856 0l-5.758-2.303A.5.5 0 0 1 3 13.822V6.176a.5.5 0 0 1 .314-.464L9.072 3.41Z"/></svg>
+                </button>
+                
                 <span>{child.name || `Untitled ${child.type}`}</span>
             </div>
         {/each}
 
         {#if player}
-            <div class="item">
+            <div class="item"
+                class:selected="{$selectedGameObjectId === `Player_0`}"
+
+                on:click="{() => {
+                    player.type = "Player"
+                    player.name = "Player"
+                    selectGameObject(0, player)
+                }}"
+            >
                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path fill="currentColor" d="M6 7.5a.5.5 0 0 1 1 0V9h1.5a.5.5 0 0 1 0 1H7v1.5a.5.5 0 0 1-1 0V10H4.5a.5.5 0 0 1 0-1H6V7.5Zm9 .5a1 1 0 1 1-2 0a1 1 0 0 1 2 0Zm-3 4a1 1 0 1 0 0-2a1 1 0 0 0 0 2ZM2 9.5A5.5 5.5 0 0 1 7.5 4h5a5.5 5.5 0 1 1 0 11h-5A5.5 5.5 0 0 1 2 9.5ZM7.5 5a4.5 4.5 0 0 0 0 9h5a4.5 4.5 0 1 0 0-9h-5Z"/></svg>
                 <!-- <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path fill="currentColor" d="M10 2a4 4 0 1 0 0 8a4 4 0 0 0 0-8Zm-4.991 9A2.001 2.001 0 0 0 3 13c0 1.691.833 2.966 2.135 3.797C6.417 17.614 8.145 18 10 18c1.855 0 3.583-.386 4.865-1.203C16.167 15.967 17 14.69 17 13a2 2 0 0 0-2-2H5.009Z"/></svg> -->
                 <!-- <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path fill="currentColor" d="M10 2a4 4 0 1 0 0 8a4 4 0 0 0 0-8ZM7 6a3 3 0 1 1 6 0a3 3 0 0 1-6 0Zm-1.991 5A2.001 2.001 0 0 0 3 13c0 1.691.833 2.966 2.135 3.797C6.417 17.614 8.145 18 10 18c1.855 0 3.583-.386 4.865-1.203C16.167 15.967 17 14.69 17 13a2 2 0 0 0-2-2H5.009ZM4 13c0-.553.448-1 1.009-1H15a1 1 0 0 1 1 1c0 1.309-.622 2.284-1.673 2.953C13.257 16.636 11.735 17 10 17c-1.735 0-3.257-.364-4.327-1.047C4.623 15.283 4 14.31 4 13Z"/></svg> -->
@@ -195,7 +250,11 @@ renderer
         padding-left: 20px;
     }
 
-    .item > svg {
+    .item.selected {
+        background: #2C5D87;
+    }
+
+    .item svg {
         width: 20px;
         height: 20px;
         padding: 0;
@@ -209,6 +268,20 @@ renderer
         font-size: 15px;
         padding-left: 4px;
         color: #D0D0D0;
+    }
+
+    .act {
+        border: 0;
+        margin: 0;
+        background: transparent;
+    }
+
+    .item > button {
+        height: 20px;
+    }
+
+    .item > button:hover {
+        cursor: pointer;
     }
 
     button {

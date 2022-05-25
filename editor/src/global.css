@@ -1,0 +1,66 @@
+/* 
+input, button, select, textarea {
+	font-family: inherit;
+	font-size: inherit;
+	-webkit-padding: 0.4em 0;
+	padding: 0.4em;
+	margin: 0 0 0.5em 0;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+} */
+
+
+button {
+	margin: 0;
+    padding: 0;
+    background-color: var(--base);
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    cursor: default;
+    border: none;
+}
+
+
+input[type="text"] {
+    margin: 2px 4px;
+    background: #2A2A2A;
+    border: 1px solid #202020;
+    border-top: 1px solid #0D0D0D;
+    border-radius: 0.375rem;
+    padding: 0 4px;
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #2A2A2A;
+    border: 1px solid #202020;
+    border-top: 1px solid #0D0D0D;
+    width: 16px;
+    height: 16px;
+    border-radius: 0.125em;
+    place-content: center;
+}
+
+input[type="checkbox"]:checked::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    background-color: #E6E6E6;
+    /* position: absolute; */
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 12 12"%3E%3Cpath fill="currentColor" d="M9.765 3.205a.75.75 0 0 1 .03 1.06l-4.25 4.5a.75.75 0 0 1-1.075.015L2.22 6.53a.75.75 0 0 1 1.06-1.06l1.705 1.704l3.72-3.939a.75.75 0 0 1 1.06-.03Z"%2F%3E%3C%2Fsvg%3E');
+    background-size: 12px 12px;
+    margin: 1px;
+    display: block;
+}
+
+input[type="number"] {
+    margin: 2px 4px;
+    background: #2A2A2A;
+    border: 1px solid #202020;
+    border-top: 1px solid #0D0D0D;
+    border-radius: 0.375rem;
+}

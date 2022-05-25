@@ -35,18 +35,23 @@ export class Player extends SpineObject {
     // this.state = State.Run
     // this.spine.setDepth(Constants.Boy.depth)
 
-    this.setScale(0.5)
+    // this.setScale(0.5)
+
+    this.initPhysics()
+    this.initSpine()
 
     this.initStates(scene)
     this.initEvents()
 
-    this.initPhysics()
-
     this.initControls()
-
     this.initBullet()
 
     // this.spine.play('idle', true, true)
+  }
+
+  initSpine() {
+    this.setSkin('Normal')
+    this.setAttachment('Slot_Sniper', 'Sniper_02')
   }
 
   initStates(scene: Phaser.Scene) {
@@ -87,7 +92,7 @@ export class Player extends SpineObject {
     this.spine.on(
       'end',
       (ev) => {
-        handleEvent(ev, 'end')
+        // handleEvent(ev, 'end')
       },
       this
     )
@@ -95,7 +100,7 @@ export class Player extends SpineObject {
     this.spine.on(
       'start',
       (ev) => {
-        handleEvent(ev, 'start')
+        // handleEvent(ev, 'start')
       },
       this
     )
@@ -103,16 +108,10 @@ export class Player extends SpineObject {
     this.spine.on(
       'complete',
       (ev) => {
-        handleEvent(ev, 'complete')
+        // handleEvent(ev, 'complete')
       },
       this
     )
-  }
-
-  initPhysics() {
-    let gravity = 300
-    // TODO: change gravity on slime and stuff
-    this.body.setGravityY(gravity).setCollideWorldBounds()
   }
 
   initControls() {
@@ -123,7 +122,27 @@ export class Player extends SpineObject {
 
   update(time: number, delta: number) {
 
-    this.states.step()
+    // this.states.step()
+
+    let moveVelocity = 600
+
+    if (this.cursors.left.isDown) {
+      this.body.setVelocityX(-moveVelocity)
+
+      // player.anims.play('left', true)
+    } else if (this.cursors.right.isDown) {
+      this.body.setVelocityX(moveVelocity)
+
+      // player.anims.play('right', true)
+    } else {
+      this.body.setVelocityX(0)
+
+      // player.anims.play('turn')
+    }
+
+    if (this.cursors.up.isDown && this.body.touching.down) {
+      this.body.setVelocityY(-moveVelocity*2.5)
+    }
 
     return
 
