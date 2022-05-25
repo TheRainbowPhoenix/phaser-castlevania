@@ -32,11 +32,31 @@
                 <label>
                     Velocity <input type=checkbox bind:checked={item.debugShowVelocity}>
                 </label>
-                <!-- <label>X <input bind:value={item.x} type="number"></label> -->
-                <!-- <label>Y <input bind:value={item.y} type="number"></label> -->
-                <!-- <label>Z <input bind:value={item.z} type="number"></label> -->
             </div>
         </div>
+
+        <div class="line">
+            <span>Gravity</span>
+            <div class="values">
+                <label>
+                    allow <input type=checkbox bind:checked={item.allowGravity}>
+                </label>
+
+                <label>
+                    mass <input bind:value={item.mass} type="number">
+                </label>
+            </div>
+        </div>
+
+        <div class="line">
+            <span>Pushable</span>
+            <div class="values">
+                <label>
+                    <input type=checkbox bind:checked={item.pushable}>
+                </label>
+            </div>
+        </div>
+
 
         <div class="line">
             <button class="act"
@@ -54,6 +74,93 @@
         <div class="line">
             <span>Arcade.Body</span>
         </div>
+
+        <div class="line">
+            <span>Bounce</span>
+            <div class="values">
+                <label>
+                    X <input bind:value={item.bounce.x} type="number" step="0.1">
+                </label>
+
+                <label>
+                    Y <input bind:value={item.bounce.y} type="number" step="0.1">
+                </label>
+            </div>
+        </div>
+
+        <div class="line">
+            <span>Collide World bounds</span>
+            <div class="values">
+                <label>
+                    <input type=checkbox checked={item.collideWorldBounds}
+
+                    on:click|preventDefault={() => {
+                        item.setCollideWorldBounds(!item.collideWorldBounds)
+                    }}
+                    >
+                </label>
+            </div>
+        </div>
+
+        <div class="line">
+            <span>Gravity</span>
+            <div class="values">
+                <label>
+                    X <input bind:value={item.gravity.x} type="number" step="0.1">
+                </label>
+
+                <label>
+                    Y <input bind:value={item.gravity.y} type="number" step="0.1">
+                </label>
+            </div>
+        </div>
+
+        <div class="line">
+            <span>Size</span>
+            <div class="values">
+                <label>
+                    Width 
+                    <input value={item.width} type="number"
+                        on:input="{ e => {
+                                let val = parseFloat(e.target.value)
+                                if(typeof val == 'number' && !isNaN(val)) {
+                                    item.setSize(val, item.height, item.center)
+                                }
+                            }}"
+                    >
+                </label>
+
+                <label>
+                    Height <input value={item.height} type="number"
+                        on:input="{ e => {
+                                let val = parseFloat(e.target.value)
+                                if(typeof val == 'number' && !isNaN(val)) {
+                                    item.setSize(item.width, val, item.center)
+                                }
+                            }}"
+                    >
+                </label>
+            </div>
+        </div>
+
+        <div class="line">
+            <button class="act"
+                on:click="{item.updateFromGameObject && item.updateFromGameObject()}"
+            >
+                Refresh from GameObject
+            </button>
+        </div>
+
+        <!--
+    this.player.body.setBounce(0.4, 0.4)
+    this.player.body.setCollideWorldBounds(false)
+    this.player.body.setGravityY(300)
+
+    this.player.body.setSize(150, 480)
+    this.player.body.setOffset(290, 5)
+    this.player.body.updateFromGameObject()
+
+        -->
     {/if}    
     
 </BaseComponent>
@@ -90,5 +197,9 @@
 
     button.act:hover {
         background-color: #676767;
+    }
+
+    input[type="number"] {
+        width: 50px;
     }
 </style>

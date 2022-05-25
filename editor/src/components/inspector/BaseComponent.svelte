@@ -86,5 +86,6 @@
         display: flex;
         user-select: none;
         flex-direction: column;
+        padding-bottom: 12px;
     }
 </style>

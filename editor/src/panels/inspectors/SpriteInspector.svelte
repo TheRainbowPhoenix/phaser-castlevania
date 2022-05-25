@@ -14,11 +14,11 @@ import TransformComponent from "../../components/inspector/TransformComponent.sv
 {#if sprite.body}
     <BodyComponent bind:item={sprite.body}/>
 
-    <h2>Body</h2>
+    <!-- <h2>Body</h2> -->
     <!-- TODO: unity-like panels :D -->
-    <div>allowGravity: {sprite.body.allowGravity}</div>
+    <!-- <div>allowGravity: {sprite.body.allowGravity}</div>
     <div>mass: {sprite.body.mass}</div>
-    <div>pushable: {sprite.body.pushable}</div>
+    <div>pushable: {sprite.body.pushable}</div> -->
 
     <div>H:{sprite.body.height} W:{sprite.body.width} - x:{sprite.body.x} y:{sprite.body.y}</div>
 

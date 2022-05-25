@@ -130,9 +130,6 @@ export class GamePlayScene extends Phaser.Scene {
     this.player.body.setCollideWorldBounds(false)
     this.player.body.setGravityY(300)
 
-    this.player.body.height = 440
-    this.player.body.width = 150
-
     this.player.body.setSize(150, 480)
     this.player.body.setOffset(290, 5)
     this.player.body.updateFromGameObject()

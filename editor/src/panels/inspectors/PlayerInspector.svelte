@@ -1,4 +1,7 @@
 <script>
+import { bind } from "svelte/internal";
+import BodyComponent from "../../components/inspector/BodyComponent.svelte";
+
     export let player;
 
     const getJSON = (player) => {
@@ -16,6 +19,8 @@
         }
     }
 </script>
+
+<BodyComponent bind:item={player.body} />
 
 <div>Alive: {player.alive || ''}</div>
 <div>Dash: {player.alive || ''}</div>
