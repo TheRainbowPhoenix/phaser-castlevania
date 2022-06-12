@@ -6,7 +6,10 @@ export default {
   width: 800 * 1.5,
   height: 600 * 1.5,
   parent: document.getElementById('game'),
-  hideBanner: true,  // Hide the console banner
+  hideBanner: true, // Hide the console banner
+  input: {
+    gamepad: true,
+  },
   physics: {
     // default: 'matter',
     // matter: {
@@ -14,8 +17,12 @@ export default {
     // }
     default: 'arcade',
     arcade: {
-      gravity: { y: 300 },
+      gravity: { y: 990 },
       debug: true,
+    },
+    fps: {
+      target: 30,
+      forceSetTimeOut: true,
     },
   },
   // pixelArt: true,

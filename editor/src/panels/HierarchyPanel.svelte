@@ -238,6 +238,7 @@ renderer
         flex-direction: column;
         overflow: auto;
         background: #383838;
+        color: #B4B4B4;
     }
 
     .item:hover {

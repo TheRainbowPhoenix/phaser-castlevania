@@ -1,5 +1,6 @@
 <script>
-    import { tooltip } from "./utils/tooltip";
+    import DummySettings from "./settings/DummySettings.svelte";
+import { tooltip } from "./utils/tooltip";
 
     export let gameRef;
 
@@ -31,6 +32,7 @@
         gameRef.loop.step();
     }
 
+    let showSettings = false
     
 </script>
 
@@ -144,6 +146,13 @@
     </div>
 
     <div class="items">
+        <button title="Settings" use:tooltip on:click="{() => showSettings = !showSettings }">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path fill="currentColor" d="M1.91 7.383a8.491 8.491 0 0 1 1.78-3.08a.5.5 0 0 1 .54-.135l1.918.686a1 1 0 0 0 1.32-.762l.366-2.006a.5.5 0 0 1 .388-.4a8.532 8.532 0 0 1 3.555 0a.5.5 0 0 1 .387.4l.367 2.006a1 1 0 0 0 1.32.762l1.918-.686a.5.5 0 0 1 .54.136a8.491 8.491 0 0 1 1.78 3.079a.5.5 0 0 1-.152.535l-1.555 1.32a1 1 0 0 0 0 1.524l1.555 1.32a.5.5 0 0 1 .152.535a8.491 8.491 0 0 1-1.78 3.08a.5.5 0 0 1-.54.135l-1.918-.686a1 1 0 0 0-1.32.762l-.367 2.007a.5.5 0 0 1-.387.399a8.53 8.53 0 0 1-3.555 0a.5.5 0 0 1-.388-.4l-.365-2.006a1 1 0 0 0-1.32-.762l-1.919.686a.5.5 0 0 1-.54-.136a8.49 8.49 0 0 1-1.78-3.079a.5.5 0 0 1 .153-.535l1.554-1.32a1 1 0 0 0 0-1.524l-1.554-1.32a.5.5 0 0 1-.153-.535ZM8 10a2 2 0 1 0 4 0a2 2 0 0 0-4 0Z"/></svg>
+        </button>
+        <DummySettings bind:show={showSettings} />
+    </div>
+
+    <!-- <div class="items">
         <button title="Collaborate" use:tooltip>
             <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path fill="currentColor" d="m13.073 15l-.384 1.605c-.184.771-.865 1.33-1.67 1.39l-.144.005h-1.75c-.818 0-1.535-.516-1.776-1.262l-.038-.133L6.928 15h6.145ZM10 2c3.314 0 6 2.597 6 5.8c0 1.677-.745 3.216-2.204 4.594a.599.599 0 0 0-.145.213l-.026.081L13.311 14h-2.81V9.497a.5.5 0 1 0-1 0V14H6.688l-.313-1.311a.595.595 0 0 0-.17-.295c-1.39-1.312-2.133-2.77-2.2-4.355L4 7.8l.003-.191C4.108 4.494 6.753 2 10 2Zm-.5 4.502v1.002a.5.5 0 0 0 1 0V6.502a.5.5 0 0 0-1 0Zm3.35.941a.5.5 0 0 0-.707 0l-.708.709a.5.5 0 0 0 .707.707l.709-.709a.5.5 0 0 0 0-.707Zm-4.998 0a.5.5 0 1 0-.707.707l.708.709a.5.5 0 1 0 .707-.707l-.708-.709Z"/></svg>
         </button>
@@ -153,11 +162,11 @@
         <button title="Manage services" use:tooltip>
             <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path fill="currentColor" d="M10 4c2.817 0 4.415 1.923 4.647 4.246h.07c1.814 0 3.283 1.512 3.283 3.377C18 13.488 16.53 15 14.718 15H5.282C3.469 15 2 13.488 2 11.623c0-1.865 1.47-3.377 3.282-3.377h.071C5.587 5.908 7.183 4 10 4Z"/></svg>
         </button>
-    </div>
+    </div> -->
 
     <div class="items">
         <button class="dropdown" title="Account profile" use:tooltip>
-            <span>Account</span>
+            <span>Engine</span>
             <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path fill="currentColor" d="M5.797 7a1 1 0 0 0-.778 1.628l3.814 4.723a1.5 1.5 0 0 0 2.334 0l3.815-4.723A1 1 0 0 0 14.204 7H5.797Z"/></svg>
         </button>
     </div>

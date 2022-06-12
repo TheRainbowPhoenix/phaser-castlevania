@@ -64,3 +64,15 @@ input[type="number"] {
     border-top: 1px solid #0D0D0D;
     border-radius: 0.375rem;
 }
+
+svg {
+    color: hsl(0deg, 0%, 94%);
+}
+
+input, .toolbar {
+    color: #B4B4B4;
+}
+
+body {
+    overflow: hidden;
+}

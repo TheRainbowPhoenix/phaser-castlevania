@@ -124,24 +124,47 @@ export class Player extends SpineObject {
 
     // this.states.step()
 
-    let moveVelocity = 600
+    let moveVelocity = 800
 
-    if (this.cursors.left.isDown) {
-      this.body.setVelocityX(-moveVelocity)
 
-      // player.anims.play('left', true)
-    } else if (this.cursors.right.isDown) {
-      this.body.setVelocityX(moveVelocity)
+    // TODO: do better !!
+    let moveLeft = this.cursors.left.isDown
+    let moveRight = this.cursors.right.isDown
+    let jumpUp = this.cursors.up.isDown
 
-      // player.anims.play('right', true)
-    } else {
-      this.body.setVelocityX(0)
+    // TODO: DO NOT CALL SCENE HERE
+    if (!!this.scene.input.gamepad && this.scene.input.gamepad.total > 0) {
+      var pad = this.scene.input.gamepad.getPad(0)
 
-      // player.anims.play('turn')
+      if (pad.axes.length) {
+        var axisH = pad.axes[0].getValue()
+        var axisV = pad.axes[1].getValue()
+
+        moveLeft = moveLeft || axisH < 0
+        moveRight = moveRight || axisH > 0
+
+        
+
+        jumpUp = jumpUp || pad.buttons[1].value > 0 // || axisV < -0.5
+      }
+
     }
+      if (moveLeft) {
+        this.body.setVelocityX(-moveVelocity)
 
-    if (this.cursors.up.isDown && this.body.touching.down) {
-      this.body.setVelocityY(-moveVelocity*2.5)
+        // player.anims.play('left', true)
+      } else if (moveRight) {
+        this.body.setVelocityX(moveVelocity)
+
+        // player.anims.play('right', true)
+      } else {
+        this.body.setVelocityX(0)
+
+        // player.anims.play('turn')
+      }
+
+    if (jumpUp && this.body.touching.down) {
+      this.body.setVelocityY(-moveVelocity * 2.5)
     }
 
     return

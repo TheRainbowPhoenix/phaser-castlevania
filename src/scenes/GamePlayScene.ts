@@ -4,6 +4,7 @@ import { Player } from "../objects/Player"
 export class GamePlayScene extends Phaser.Scene {
   player: Player
   npcTest: SpineObject
+  text: Phaser.GameObjects.Text
 
   controls: Phaser.Cameras.Controls.SmoothedKeyControl
   platforms: Phaser.Physics.Arcade.StaticGroup
@@ -14,6 +15,8 @@ export class GamePlayScene extends Phaser.Scene {
 
   preload() {
     this.game.events.emit('preloadScene', 'GamePlayScene', this)
+
+    this.load.sceneFile('TestLoadScene', 'scenes/testLoadScene.js')
 
     // let SPINEBOY_KEY = 'Girl'
     // this.load.setPath('assets/girl/')
@@ -28,6 +31,9 @@ export class GamePlayScene extends Phaser.Scene {
     this.add.image(400, 625, 'labo_test')
 
     this.scene.run('GameUIScene')
+    this.scene.run('TestLoadScene')
+
+    this.text = this.add.text(150, 150, 'test')
 
     // BG Walls
     let bgWallsGroup = this.add.group()
@@ -126,14 +132,14 @@ export class GamePlayScene extends Phaser.Scene {
 
     this.physics.add.existing(this.player.spine)
     // this.player.body.setOffset(0, 120)
-    this.player.body.setBounce(0.4, 0.4)
+    this.player.body.setBounce(0, 0)
     this.player.body.setCollideWorldBounds(false)
     this.player.body.setGravityY(300)
 
     this.player.body.setSize(150, 480)
     this.player.body.setOffset(290, 5)
     this.player.body.updateFromGameObject()
-    
+
     // let bodyBound = new Phaser.Geom.Rectangle(0, 0, );
     // this.player.body.setBoundsRectangle(bodyBound)
     // this.physics.add.existing(this.npcTest.spine)
@@ -284,6 +290,9 @@ export class GamePlayScene extends Phaser.Scene {
   update(time: number, delta: number) {
     this.player.update(time, delta)
     // this.npcTest.update(time, delta)
+    // this.dummyGamePadTest()
     this.controls.update(delta)
   }
+
+
 }

@@ -138,6 +138,7 @@ import SpriteInspector from "./inspectors/SpriteInspector.svelte";
         flex-direction: column;
         overflow: auto;
         background: #383838;
+        color: #B4B4B4;
     }
 
     button {
